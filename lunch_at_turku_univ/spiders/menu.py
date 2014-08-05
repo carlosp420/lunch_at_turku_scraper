@@ -12,6 +12,7 @@ class MenuSpider(scrapy.Spider):
         'http://www.unica.fi/en/restaurants/macciavelli/',
         'http://www.unica.fi/en/restaurants/delica/',
         'http://www.unica.fi/en/restaurants/mikro/',
+        'http://www.unica.fi/en/restaurants/dental/',
         'http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/turku/turku-school-of-economics--monttu--bistro/',
     )
 
