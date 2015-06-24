@@ -2,7 +2,9 @@
 import datetime
 
 import scrapy
-from lunch_at_turku_univ.items import LunchItem as Item
+from scrapy.loader import ItemLoader
+
+from lunch_at_turku_univ.items import LunchItem
 
 
 class MenuSpider(scrapy.Spider):
@@ -18,27 +20,32 @@ class MenuSpider(scrapy.Spider):
 
     def parse(self, response):
         today = datetime.date.today()
-        today = datetime.datetime.strftime(today, '%A, %d %b %Y')
+        today_long_date = datetime.datetime.strftime(today, '%A, %d %b %Y')
+        today = datetime.datetime.strftime(today, '%A')
 
         sel = response.xpath
+        restaurant = self.get_title(sel)
+
+        l = ItemLoader(item=LunchItem(), response=response)
+        l.add_value('restaurant', restaurant)
+        l.add_xpath('dishes', "//h4[text()='" + today + "']/following-sibling::table//td[@class='lunch']")
+        l.add_value('day', today_long_date)
+
+        yield l.load_item()
+
+    def get_title(self, sel):
         rest = sel("//title/text()").extract()
         rest = rest[0].split("|")[0].strip()
 
-        item = Item()
-
         if rest.lower() == "macciavelli":
-            item['restaurant'] = rest + "-Educarium"
+            restaurant = rest + "-Educarium"
         elif rest.lower() == "delica":
-            item['restaurant'] = rest + "-Pharmacity"
+            restaurant = rest + "-Pharmacity"
         elif rest.lower() == "mikro":
-            item['restaurant'] = rest + "-Medicine"
+            restaurant = rest + "-Medicine"
         elif "monttu" in rest.lower():
-            item['restaurant'] = "Monttu-Economics"
+            restaurant = "Monttu-Economics"
         else:
-            item['restaurant'] = rest
+            restaurant = rest
 
-        item['dishes'] = sel("//h4[text()='" + today + "']/following-sibling::table//td[@class='lunch']/text()").extract()
-
-        item['day'] = today
-
-        yield item
+        return restaurant
