@@ -8,7 +8,7 @@ from lunch_at_turku_univ.items import LunchItem
 
 
 class MenuSpider(scrapy.Spider):
-    name = "menu"
+    name = "unica"
     allowed_domains = ["unica.fi"]  # , "amica.fi"]
     start_urls = (
         'http://www.unica.fi/en/restaurants/macciavelli/',

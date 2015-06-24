@@ -14,4 +14,8 @@ SPIDER_MODULES = ['lunch_at_turku_univ.spiders']
 NEWSPIDER_MODULE = 'lunch_at_turku_univ.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'lunch_at_turku_univ (+http://www.yourdomain.com)'
+USER_AGENT = 'lunch_at_turku_univ (+http://carlosp420.github.io)'
+
+ITEM_PIPELINES = {
+    'lunch_at_turku_univ.pipelines.UnicaPipeline': 300,
+}
