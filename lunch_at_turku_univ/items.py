@@ -8,7 +8,7 @@
 import scrapy
 
 
-class LunchAtTurkuUnivItem(scrapy.Item):
+class LunchItem(scrapy.Item):
     # define the fields for your item here like:
     day = scrapy.Field()
     dishes = scrapy.Field()

@@ -2,23 +2,23 @@
 import datetime
 
 import scrapy
-from lunch_at_turku_univ.items import LunchAtTurkuUnivItem as Item
+from lunch_at_turku_univ.items import LunchItem as Item
 
 
 class MenuSpider(scrapy.Spider):
     name = "menu"
-    allowed_domains = ["unica.fi"]
+    allowed_domains = ["unica.fi"]  # , "amica.fi"]
     start_urls = (
         'http://www.unica.fi/en/restaurants/macciavelli/',
         'http://www.unica.fi/en/restaurants/delica/',
         'http://www.unica.fi/en/restaurants/mikro/',
         'http://www.unica.fi/en/restaurants/dental/',
-        'http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/turku/turku-school-of-economics--monttu--bistro/',
+        # 'http://www.amica.fi/en/restaurants/ravintolat-kaupungeittain/turku/turku-school-of-economics--monttu--bistro/',
     )
 
     def parse(self, response):
         today = datetime.date.today()
-        today = datetime.datetime.strftime(today, '%A')
+        today = datetime.datetime.strftime(today, '%A, %d %b %Y')
 
         sel = response.xpath
         rest = sel("//title/text()").extract()
