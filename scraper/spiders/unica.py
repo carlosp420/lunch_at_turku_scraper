@@ -4,7 +4,7 @@ import datetime
 import scrapy
 from scrapy.loader import ItemLoader
 
-from lunch_at_turku_univ.items import LunchItem
+from scraper.items import LunchItem
 
 
 class MenuSpider(scrapy.Spider):
