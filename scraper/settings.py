@@ -10,12 +10,12 @@
 
 BOT_NAME = 'lunch_at_turku_univ'
 
-SPIDER_MODULES = ['lunch_at_turku_univ.spiders']
-NEWSPIDER_MODULE = 'lunch_at_turku_univ.spiders'
+SPIDER_MODULES = ['scraper.spiders']
+NEWSPIDER_MODULE = 'scraper.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'lunch_at_turku_univ (+http://carlosp420.github.io)'
+USER_AGENT = 'lunch_at_turku_univ (+http://mycalesis.me/lunch/)'
 
 ITEM_PIPELINES = {
-    'lunch_at_turku_univ.pipelines.UnicaPipeline': 300,
+    'scraper.pipelines.UnicaPipeline': 300,
 }
