@@ -26,8 +26,11 @@ class CafeArkenSpider(scrapy.Spider):
         dishes = []
         for i in response.xpath('//h3'):
             if todays_date in i.extract():
-                for j in i.xpath('following-sibling::table//td/a/text()'):
+                table = i.xpath('following-sibling::table')[0]
+                for j in table.xpath('.//td/a/text()'):
                     dishes.append(j.extract().strip())
+                break
+
 
         l = ItemLoader(item=LunchItem(), response=response)
         l.add_value('restaurant', u'Café ARKEN')
